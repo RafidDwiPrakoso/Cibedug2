@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Prestasi Cibedug 2</title>
+    <!-- Menggunakan CDN Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> <!-- Untuk animasi -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white text-center py-12">
+        <h1 class="text-4xl font-bold mb-4">Prestasi Cibedug 2</h1>
+        <p class="text-lg">Kumpulan prestasi gemilang yang diraih oleh siswa dan siswi kami</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-12 px-4 sm:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="WhatsApp Image 2024-12-09 at 10.24.31_92a0d3b9.jpg" alt="Prestasi 1" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Juara 3 Lomba Karya Tulis Ilmiah</h2>
+                    <p><strong>"Peran & Tugas Palang Merah Indonesia"</strong></p>
+                    <p class="text-gray-600 mt-2">Diraih oleh siswa kelas XII, Putri Ramadani, dalam ajang Lomba Karya Tulis Ilmiah dalam rangka HUT PMI ke-77.</p>
+                    <p class="text-gray-800 font-semibold mt-4">Tanggal: 17 September 2022</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 mt-4 inline-block">Lihat Sertifikat</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="WhatsApp Image 2024-12-09 at 10.28.27_8c000f54.jpg" alt="Prestasi 2" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Juara 3 Futsal</h2>
+                    <p class="text-gray-600 mt-2">Tim futsal dari SMK Wikrama Bogor berhasil mendapatkan juara 3 di lomba Futsal LIga Pelajar Bogor Timur dan salah satu nya adalah Aditya Faisal Akbar.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="WhatsApp Image 2024-12-10 at 17.09.50_81b8ddf2.jpg" alt="Prestasi 3" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Menjadi Petugas Upacara 17 Agustus 2024</h2>
+                    <p class="text-gray-600 mt-2">Naufal Daffa Musyava menjadi salah satu petugas upacara 17 Agustus 2024.</p>
+                    <p class="text-gray-800 font-semibold mt-4">Tanggal: 17 Agustus 2024</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="image.png" alt="Prestasi 4" class="w-full h-64 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Juara 1 Lomba Pertolongan Pertama Lapangan</h2>
+                    <p class="text-gray-600 mt-2">Diraih oleh siswa kelas XI, Rafid Dwi Prakoso, dalam ajang Lomba Pertolongan Pertama Lapangan untuk SMA/SMK se-Bogor Raya dan Depok.</p>
+                    <p class="text-gray-800 font-semibold mt-4">Tanggal: 29 Oktober 2023</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Rayon Cibedug 2. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script untuk Navbar -->
+    <script>
+        // Load navbar from navbar.html
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+                initializeBurgerMenu();
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        function initializeBurgerMenu() {
+            const burgerButton = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const burgerBars = document.querySelectorAll('.burger-bar');
+
+            burgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                burgerBars.forEach(bar => bar.classList.toggle('open'));
+            });
+        }
+    </script>
+
+    <!-- Inisialisasi AOS untuk Animasi -->
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

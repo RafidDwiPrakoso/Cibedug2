@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Kegiatan Cibedug 2</title>
+    <!-- Menggunakan CDN Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> <!-- Untuk animasi -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Header -->
+    <header class="bg-gray-800 text-white text-center py-12">
+        <h1 class="text-4xl font-bold mb-4">Kegiatan Cibedug 2</h1>
+        <p class="text-lg mb-4">Menjadi bagian dari kegiatan yang bermanfaat untuk perkembangan bersama</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-8 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Kegiatan 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="IMG_5557.jpg" alt="Bakti Sosial Membersihkan Mesjid" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Bakti Sosial
+                        Membersihkan Mesjid</h2>
+                    <p class="text-gray-600 mt-2">Kegiatan bakti sosial untuk membersihkan mesjid dan membantu masyarakat.</p>
+                    <p class="text-gray-800 font-semibold mt-4">Tanggal: 4 Februari 2024</p>
+                </div>
+            </div>
+
+            <!-- Kegiatan 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="WhatsApp Image 2024-12-07 at 21.21.52_b8d5eb43.jpg" alt="Buka Bersama" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Buka Bersama</h2>
+                    <p class="text-gray-600 mt-2">Menjalin kebersamaan dalam kehangatan, dengan berbuka bersama untuk
+                        mempererat tali silaturahmi.</p>
+                    <p class="text-gray-800 font-semibold mt-4">Tanggal: Maret 2024</p>
+                </div>
+            </div>
+
+            <!-- Kegiatan 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
+                data-aos="fade-up" data-aos-duration="1000">
+                <img src="WhatsApp Image 2024-12-09 at 10.31.03_c1601b5b.jpg" alt="Pengambilan Raport"
+                    class="w-full h-48 object-cover rounded-t-lg">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-200">Pengambilan
+                        Raport PTS ganjil T.A 2024-2025</h2>
+                    <p class="text-gray-600 mt-2">Pengambilan Raport dirumah Khairul Azzam.</p>
+                    <p class="text-gray-800 font-semibold mt-4">Tanggal: 9 November 2024</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Rayon Cibedug 2. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script untuk Navbar -->
+    <script>
+        // Load navbar from navbar.html
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+                // After navbar is loaded, initialize the burger functionality
+                initializeBurgerMenu();
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        function initializeBurgerMenu() {
+            const burgerButton = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const burgerBars = document.querySelectorAll('.burger-bar');
+
+            // Toggle the mobile menu and burger bar animation on click
+            burgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                burgerBars.forEach(bar => bar.classList.toggle('open'));
+            });
+        }
+    </script>
+
+    <!-- Inisialisasi AOS untuk Animasi -->
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

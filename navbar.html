@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Cibedug 2</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link ke Google Fonts untuk font Lato -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Menggunakan font Lato untuk seluruh body */
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Navbar sticky */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.7); /* Sedikit transparansi */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Navbar ketika scroll */
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 1); /* Solid warna ketika scroll */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling teks di navbar */
+        nav a {
+            color: black; /* Warna teks hitam secara default */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Menambahkan bayangan untuk visibilitas */
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            font-weight: 500; /* Menambahkan ketebalan font */
+        }
+
+        nav.scrolled a {
+            color: black; /* Warna teks tetap hitam ketika navbar tidak transparan */
+            text-shadow: none; /* Menghilangkan bayangan ketika navbar sudah berwarna */
+        }
+
+        /* Hanya link yang berubah warna menjadi biru saat hover */
+        nav ul li a:hover {
+            color: #3B82F6; /* Biru */
+        }
+
+        /* Mengatur warna logo agar tetap tidak berubah */
+        .navbar-logo {
+            color: black; /* Logo tetap hitam */
+            font-weight: 600; /* Font lebih tebal untuk logo */
+        }
+
+        /* Burger menu effect */
+        .burger-bar {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .burger-bar:nth-child(1).open {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger-bar:nth-child(2).open {
+            opacity: 0;
+        }
+
+        .burger-bar:nth-child(3).open {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Menu Mobile */
+        .mobile-menu {
+            display: none; /* Disembunyikan secara default */
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Animasi untuk muncul dan menghilang */
+            transform: translateY(-20px); /* Posisi awal di atas */
+            opacity: 0; /* Opacity diatur menjadi 0 ketika menu disembunyikan */
+        }
+
+        /* Ketika menu di-toggle */
+        .mobile-menu.open {
+            display: flex; /* Menampilkan menu ketika tombol diklik */
+            transform: translateY(0); /* Posisi menu kembali normal */
+            opacity: 1; /* Mengatur opacity menjadi 1 */
+        }
+
+        /* Efek fade-in */
+        .fade-in {
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Efek slide-up */
+        .slide-up {
+            animation: slideUp 1s ease-out;
+        }
+    </style>
+
+</head>
+
+<!-- Navbar -->
+<nav id="navbar" class="sticky top-0 z-10 bg-white bg-opacity-70 backdrop-blur-md shadow-md transition-all">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <!-- Logo -->
+        <a href="#" class="text-xl font-bold">Cibedug 2<span class="text-blue-500">.</span></a>
+
+        <!-- Burger menu untuk mobile -->
+        <div class="sm:hidden">
+            <button id="burger" class="flex items-center px-3 py-2">
+                <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3 6h18M3 12h18m-9 6h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menu Desktop -->
+        <div id="nav" class="hidden sm:flex sm:items-center sm:justify-end">
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-blue-500">Beranda</a></li>
+                <!-- Dropdown Siswa -->
+                <li class="relative group">
+                    <a href="#" class="hover:text-blue-500">Siswa</a>
+                    <ul
+                        class="absolute left-0 top-full mt-2 w-40 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <li><a href="kelas1.html" class="block px-4 py-2 hover:bg-gray-100">Kelas 1</a></li>
+                        <li><a href="kelas2.html" class="block px-4 py-2 hover:bg-gray-100">Kelas 2</a></li>
+                        <li><a href="kelas3.html" class="block px-4 py-2 hover:bg-gray-100">Kelas 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="kegiatan.html" class="hover:text-blue-500">Kegiatan</a></li>
+                <li><a href="prestasi.html" class="hover:text-blue-500">Prestasi</a></li>
+                <li><a href="kontak.html" class="hover:text-blue-500">Kontak</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="index.html" class="hover:text-blue-500">Beranda</a>
+        <!-- Dropdown Siswa -->
+        <div>
+            <a href="#" class="block hover:text-blue-500">Siswa</a>
+            <ul class="ml-4 space-y-2">
+                <li><a href="kelas1.html" class="block hover:text-blue-500">Kelas 1</a></li>
+                <li><a href="kelas2.html" class="block hover:text-blue-500">Kelas 2</a></li>
+                <li><a href="kelas3.html" class="block hover:text-blue-500">Kelas 3</a></li>
+            </ul>
+        </div>
+        <a href="kegiatan.html" class="hover:text-blue-500">Kegiatan</a>
+        <a href="prestasi.html" class="hover:text-blue-500">Prestasi</a>
+        <a href="kontak.html" class="hover:text-blue-500">Kontak</a>
+    </div>
+</nav>
+
+<script>
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbar = document.getElementById('navbar');
+
+    // Toggle mobile menu
+    burger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open'); // Menampilkan atau menyembunyikan menu
+        // Menambahkan animasi pada burger icon
+        const burgerBars = burger.querySelectorAll('path');
+        burgerBars.forEach(bar => bar.classList.toggle('open'));
+    });
+
+    // Function untuk mengecek posisi scroll dan mengubah background navbar
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+</script>
+</html>

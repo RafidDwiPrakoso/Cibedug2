@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Cibedug 2</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Custom Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .button-hover:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /* Navbar Sticky */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #ffffff;
+        }
+
+        /* Hero Section Background */
+        .hero {
+            background-image: url('WhatsApp Image 2024-11-24 at 21.39.31_77240db2 (1).jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Overlay for background image */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        /* Text content inside hero section */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1d4ed8;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            display: none;
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Navbar -->
+    <div id="navbar" class="navbar bg-white shadow-md fade-in">
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold slide-up">Selamat Datang di Cibedug 2</h1>
+            <p class="text-lg sm:text-xl md:text-2xl slide-up">Cibedug 2 adalah sebuah tempat yang penuh dengan kenangan dan cerita..</p>
+            <a href="siswa.html"
+                class="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg button-hover transition duration-300 ease-in-out">Lihat
+                Selengkapnya</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800 fade-in">Deskripsi</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6 bg-gray-50 rounded-lg shadow-lg card-hover transition transform hover:scale-105 slide-up">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-800">Data Siswa</h4>
+                    <p class="text-gray-600">Memiliki total 48 siswa</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg shadow-lg card-hover transition transform hover:scale-105 slide-up">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-800">Pembimbing Rayon</h4>
+                    <p class="text-gray-600">Bapak Noer Sandy</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg shadow-lg card-hover transition transform hover:scale-105 slide-up">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-800">Ruang Rayon</h4>
+                    <p class="text-gray-600">134 atau ruang UKS.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2024 Rayon Cibedug 2. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <div id="backToTop" class="back-to-top">
+        ↑
+    </div>
+
+    <script>
+        // Load navbar from navbar.html
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+                initializeBurgerMenu();
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        function initializeBurgerMenu() {
+            const burgerButton = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const burgerBars = document.querySelectorAll('.burger-bar');
+
+            burgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                burgerBars.forEach(bar => bar.classList.toggle('open'));
+            });
+        }
+
+        // Back to top button functionality
+        window.onscroll = function () {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                document.getElementById("backToTop").style.display = "block";
+            } else {
+                document.getElementById("backToTop").style.display = "none";
+            }
+        };
+
+        document.getElementById("backToTop").addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+
+</body>
+
+</html>

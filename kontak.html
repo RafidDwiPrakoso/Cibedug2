@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <div id="navbar"></div>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Contact Section -->
+    <section class="py-16 bg-white flex-grow fade-in">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 slide-up">Hubungi Kami</h2>
+            <p class="text-lg text-gray-600 mb-8 slide-up">
+                Jika ada pertanyaan atau ingin berkomunikasi lebih lanjut, jangan ragu untuk menghubungi kami melalui formulir di bawah ini.
+            </p>
+
+            <!-- Contact Form -->
+            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-xl slide-up">
+                <form id="contact-form" action="#" method="POST">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 text-left">Nama</label>
+                            <input type="text" id="name" name="name"
+                                class="mt-2 p-4 w-full border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 text-left">Email</label>
+                            <input type="email" id="email" name="email" pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
+                                class="mt-2 p-4 w-full border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 text-left">Pesan</label>
+                            <textarea id="message" name="message" rows="4"
+                                class="mt-2 p-4 w-full border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required></textarea>
+                        </div>
+                        <div>
+                            <button type="button" onclick="validateAndShowModal()"
+                                class="w-full bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300">
+                                Kirim Pesan
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6 mt-auto">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2024 Rayon Cibedug 2. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Success Message -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transform scale-95 transition-all duration-500 hidden">
+        <div class="bg-white rounded-lg p-6 shadow-lg w-96">
+            <div class="text-center">
+                <h3 class="text-2xl font-semibold text-blue-600">Pesan Berhasil Terkirim!</h3>
+                <p class="text-gray-600 mt-4">Terima kasih telah menghubungi kami. Kami akan segera merespon pesan Anda.</p>
+                <button onclick="closeModal()" class="mt-6 bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Confirmation -->
+    <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transform scale-95 transition-all duration-500 hidden">
+        <div class="bg-white rounded-lg p-6 shadow-lg w-96">
+            <div class="text-center">
+                <h3 class="text-2xl font-semibold text-blue-600">Apakah Anda yakin?</h3>
+                <p class="text-gray-600 mt-4">Pesan Anda akan dikirim setelah konfirmasi ini.</p>
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button onclick="closeConfirmModal()" class="bg-gray-500 text-white px-6 py-2 rounded-full hover:bg-gray-600 transition">Batal</button>
+                    <button onclick="submitForm()" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Error Message -->
+    <div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transform scale-95 transition-all duration-500 hidden">
+        <div class="bg-white rounded-lg p-6 shadow-lg w-96">
+            <div class="text-center">
+                <h3 class="text-2xl font-semibold text-red-600">Terdapat Field yang Kosong!</h3>
+                <p class="text-gray-600 mt-4">Pastikan semua field diisi sebelum mengirim pesan.</p>
+                <button onclick="closeErrorModal()" class="mt-6 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inisialisasi EmailJS
+        emailjs.init("YOUR_USER_ID");  // Ganti dengan User ID Anda dari EmailJS
+
+        // Fungsi untuk menampilkan modal konfirmasi setelah validasi
+        function validateAndShowModal() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Validasi form
+            if (name === "" || email === "" || message === "") {
+                showErrorModal();  // Menampilkan modal error jika ada field kosong
+                return false;
+            }
+
+            // Menampilkan modal konfirmasi jika semua field sudah diisi
+            showModal();
+        }
+
+        // Fungsi untuk menampilkan modal konfirmasi
+        function showModal() {
+            const modal = document.getElementById('confirm-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0', 'scale-95'), 10);
+        }
+
+        // Fungsi untuk menutup modal konfirmasi
+        function closeConfirmModal() {
+            const modal = document.getElementById('confirm-modal');
+            modal.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 500);
+        }
+
+        // Fungsi untuk mengirim form setelah konfirmasi
+        function submitForm() {
+            const form = document.getElementById('contact-form');
+            emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", form)
+                .then(function(response) {
+                    console.log("Email berhasil terkirim", response);
+                    showSuccessModal();  // Tampilkan modal sukses
+                }, function(error) {
+                    console.error("Email gagal terkirim", error);
+                });
+            closeConfirmModal(); // Menutup modal konfirmasi setelah mengirim
+        }
+
+        // Fungsi untuk menampilkan modal sukses
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0', 'scale-95'), 10);
+        }
+
+        // Fungsi untuk menutup modal sukses
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 500);
+        }
+
+        // Fungsi untuk menutup modal error
+        function closeErrorModal() {
+            const modal = document.getElementById('error-modal');
+            modal.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 500);
+        }
+
+        // Load navbar from navbar.html
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+                // After navbar is loaded, initialize the burger functionality
+                initializeBurgerMenu();
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        function initializeBurgerMenu() {
+            const burgerButton = document.getElementById('burger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const burgerBars = document.querySelectorAll('.burger-bar');
+
+            // Toggle the mobile menu and burger bar animation on click
+            burgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                burgerBars.forEach(bar => bar.classList.toggle('open'));
+            });
+        }
+    </script>
+
+</body>
+
+</html>
